@@ -1,10 +1,2 @@
-discord
-asyncio
-pendulum
-requests
-datetime
-typing
-pymysql
-wavelink
-git+https://github.com/Rapptz/discord-ext-menus
-discord.py-message-components
+PySide2==5.15.2.1
+pythonping==1.1.1

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>631</width>
+    <height>419</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WF Server Patcher by Shitrya</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon.ico</normaloff>icon.ico</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>631</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <property name="documentMode">
+    <bool>false</bool>
+   </property>
+   <widget class="QWidget" name="tab">
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+border: 1px solid black;
+}</string>
+    </property>
+    <attribute name="title">
+     <string>Главная</string>
+    </attribute>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>0</y>
+       <width>611</width>
+       <height>391</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>122</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid black;
+</string>
+        </property>
+        <property name="text">
+         <string>Warface Server Patcher</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_novosibpatchstatus">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QPushButton" name="krasnodar_button">
+          <property name="text">
+           <string>Добавить</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Новосибирский сервер</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Краснодарский сервер</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Московский сервер</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="msk_button">
+          <property name="text">
+           <string>Добавить</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_krasnodarping">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Сервер</string>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+          <property name="indent">
+           <number>-1</number>
+          </property>
+          <property name="openExternalLinks">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Пинг</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="label_krasnodarpatchstatus">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Статус патча</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Хабаровский сервер</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QLabel" name="label_habarovskpatchstatus">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_novosibping">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QPushButton" name="novosibirsk_button">
+          <property name="text">
+           <string>Добавить</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_mskping">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="label_mskpatchstatus">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QPushButton" name="habarovsk_button">
+          <property name="text">
+           <string>Добавить</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_habarovskping">
+          <property name="text">
+           <string>Загрузка...</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <attribute name="title">
+     <string>О создателе</string>
+    </attribute>
+    <widget class="QWidget" name="verticalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>3</y>
+       <width>621</width>
+       <height>391</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_25">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>122</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt;&quot;&gt; Warface Server Patcher&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_20">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Информация: данная программа создана для обхода изменений в Игровом центре, связанных с ограниченем выбора региональных серверов. Программа автоматически вносит изменения в файл hosts, тем самым, позволяя выбрать любой желаемый сервер.&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_21">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Разработчик: &lt;/span&gt;&lt;a href=&quot;https://vk.com/shitryadima&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Дмитрий Шитря&lt;/span&gt;&lt;/a&gt; © 2022&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_22">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GitHub: &lt;a href = &quot;https://github.com/ShitryaDima/wf-server-patcher&quot;&gt;https://github.com/ShitryaDima/wf-server-patcher&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_24">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Для корректной работоспособности программа должна быть запущена от имени администратора!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Чтобы изменения вступили в силу перезайдите в Игровой центр!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

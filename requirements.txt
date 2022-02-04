@@ -1,0 +1,10 @@
+discord
+asyncio
+pendulum
+requests
+datetime
+typing
+pymysql
+wavelink
+git+https://github.com/Rapptz/discord-ext-menus
+discord.py-message-components

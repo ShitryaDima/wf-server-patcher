@@ -12,88 +12,100 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
+import re
+from sys import exit, argv
 from PySide2 import QtWidgets
 from design import Ui_Form
 from pythonping import ping
 from functools import partial
-import math
-import os
-
-
-hosts = [
-    "global.ping.warface.ru",
-"novosibirsk.ping.warface.ru",
-"krasnodar.ping.warface.ru", 
-"khabarovsk.ping.warface.ru"
-]
+from math import ceil
+from os import getenv, path
 
 class Patcher(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
-        self.__version__ = 1.0
+        self.__version__ = 1.1
         self.setupUi(self)
-        self.msk_button.clicked.connect(partial(self.server_button_pushed, 0))
-        self.novosibirsk_button.clicked.connect(partial(self.server_button_pushed, 1))
-        self.krasnodar_button.clicked.connect(partial(self.server_button_pushed, 2))
-        self.habarovsk_button.clicked.connect(partial(self.server_button_pushed, 3))
+
+        self.server_data = {
+            "Moscow": {'title': "Moscow", 'ip': "global.ping.warface.ru", 'ping': 0, 'patched': False, 'ping_label': self.label_msk_ping, 'patch_label': self.label_msk_patchstatus, 'button': self.msk_button},
+            "Novosibirsk": {'title': "Novosibirsk", 'ip': "novosibirsk.ping.warface.ru", 'ping': 0, 'patched': False, 'ping_label': self.label_novosib_ping, 'patch_label': self.label_novosib_patchstatus, 'button': self.novosibirsk_button},
+            "Krasnodar": {'title': "Krasnodar", 'ip': "krasnodar.ping.warface.ru", 'ping': 0, 'patched': False, 'ping_label': self.label_krasnodar_ping, 'patch_label': self.label_krasnodar_patchstatus, 'button': self.krasnodar_button},
+            "Khabarovsk": {'title': "Khabarovsk", 'ip': "khabarovsk.ping.warface.ru", 'ping': 0, 'patched': False, 'ping_label': self.label_khabarovsk_ping, 'patch_label': self.label_khabarovsk_patchstatus, 'button': self.khabarovsk_button},
+            "Amsterdam": {'title': "Amsterdam", 'ip': "ams.ping.wf.my.com", 'ping': 0, 'patched': False, 'ping_label': self.label_amsterdam_ping, 'patch_label': self.label_amsterdam_patchstatus, 'button': self.ams_button},
+            "Hong-Kong": {'title': "Hong-Kong", 'ip': "hongkong.ping.wf.my.com", 'ping': 0, 'patched': False, 'ping_label': self.label_hongkong_ping, 'patch_label': self.label_hongkong_patchstatus, 'button': self.hongkong_button},
+            "Washington": {'title': "Washington", 'ip': "wa.ping.wf.my.com", 'ping': 0, 'patched': False, 'ping_label': self.label_wa_ping, 'patch_label': self.label_wa_patchstatus, 'button': self.wa_button},
+            "Sao-Paulo": {'title': "Sao-Paulo", 'ip': "saopaulo.ping.wf.my.com", 'ping': 0, 'patched': False, 'ping_label': self.label_saopaulo_ping, 'patch_label': self.label_saopaulo_patchstatus, 'button': self.saopaulo_button},
+            "Istanbul": {'title': "Istanbul", 'ip': "istanbul.ping.wf.my.com", 'ping': 0, 'patched': False, 'ping_label': self.label_istanbul_ping, 'patch_label': self.label_istanbul_patchstatus, 'button': self.istanbul_button}
+        }
+
+        for server in self.server_data.values():
+            server['button'].clicked.connect(partial(self.server_button_pushed, server))
+
         self.setFixedSize(self.size())
         self.show()
 
-        self.server_data = [
-            {'name' : "Москва", 'ping' : 0, 'patched' : False},
-            {'name' : "Новосибирск", 'ping' : 0, 'patched' : False},
-            {'name' : "Краснодар", 'ping' : 0, 'patched' : False},
-            {'name' : "Хабаровск", 'ping' : 0, 'patched' : False}
-        ]
         self.set_ping()
         self.set_patch_status()
         self.update_button()
 
-    def update_ping(self):
-        self.server_data[0]['ping'] = ping(target=hosts[0], count=1, timeout=2).rtt_avg_ms
-        self.server_data[1]['ping'] = ping(target=hosts[1], count=1, timeout=2).rtt_avg_ms
-        self.server_data[2]['ping'] = ping(target=hosts[2], count=1, timeout=2).rtt_avg_ms
-        self.server_data[3]['ping'] = ping(target=hosts[3], count=1, timeout=2).rtt_avg_ms
+    def update_ping(self, server = None):
+        if server:
+            server['ping'] = ping(target=server['ip'], count=1, timeout=2).rtt_avg_ms
+            return
+        for server in self.server_data.values():
+            server['ping'] = ping(target=server['ip'], count=1, timeout=2).rtt_avg_ms
         return
 
-    def set_ping(self, need_update = True):
+    def set_ping(self, server = None, need_update = True):
+        if server:
+            self.update_ping(server) if need_update else None
+            server['ping_label'].setText(str(ceil(server['ping'])) + ' мс')
+            return
         self.update_ping() if need_update else None
-        self.label_mskping.setText(str(math.ceil(self.server_data[0]['ping'])) + ' мс')
-        self.label_novosibping.setText(str(math.ceil(self.server_data[1]['ping'])) + ' мс')
-        self.label_krasnodarping.setText(str(math.ceil(self.server_data[2]['ping'])) + ' мс')
-        self.label_habarovskping.setText(str(math.ceil(self.server_data[3]['ping'])) + ' мс')
+        for server in self.server_data.values():
+            server['ping_label'].setText(str(ceil(server['ping'])) + ' мс')
+        return
         
-    def set_patch_status(self, need_update = True):
+    def set_patch_status(self, server = None, need_update = True):
+        if server:
+            self.update_patch_status(server) if need_update else None
+            server['patch_label'].setText(str("Сервер добавлен" if server['patched'] else "Сервер не добавлен"))
+            return
         self.update_patch_status() if need_update else None
-        self.label_mskpatchstatus.setText(str("Сервер добавлен" if self.server_data[0]['patched'] else "Сервер не добавлен"))
-        self.label_novosibpatchstatus.setText(str("Сервер добавлен" if self.server_data[1]['patched'] else "Сервер не добавлен"))
-        self.label_krasnodarpatchstatus.setText(str("Сервер добавлен" if self.server_data[2]['patched'] else "Сервер не добавлен"))
-        self.label_habarovskpatchstatus.setText(str("Сервер добавлен" if self.server_data[3]['patched'] else "Сервер не добавлен"))
+        for server in self.server_data.values():
+            server['patch_label'].setText(str("Сервер добавлен" if server['patched'] else "Сервер не добавлен"))
+        return
 
-    def update_patch_status(self):
+    def update_patch_status(self, server = None):
+        if server:
+            self.update_ping(server)
+            server['patched'] = True if server['ping'] < 1 else False
+            return
         self.update_ping()
-        for server in self.server_data:
+        for server in self.server_data.values():
             if server['ping'] < 1:
                 server['patched'] = True
             else:
                 server['patched'] = False
         return
 
-    def update_button(self):
-        self.msk_button.setText(str("Удалить" if self.server_data[0]['patched'] else "Добавить"))
-        self.novosibirsk_button.setText(str("Удалить" if self.server_data[1]['patched'] else "Добавить"))
-        self.krasnodar_button.setText(str("Удалить" if self.server_data[2]['patched'] else "Добавить"))
-        self.habarovsk_button.setText(str("Удалить" if self.server_data[3]['patched'] else "Добавить"))
+    def update_button(self, server = None):
+        if server:
+            server['button'].setText(str("Удалить" if server['patched'] else "Добавить"))
+            return
+        for server in self.server_data.values():
+            server['button'].setText(str("Удалить" if server['patched'] else "Добавить"))
+        return
 
     def patch_server(self, server):
-        def add(file, number_server):
-            f.write(f"\n127.0.0.1 {hosts[number_server]}")
+        def add(f, server):
+            f.write(f"\n127.0.0.1 {server['ip']}")
             return
 
-        if os.path.exists(fr"{os.getenv('WINDIR')}\System32\drivers\etc\hosts"):
+        if path.exists(fr"{getenv('WINDIR')}\System32\drivers\etc\hosts"):
             try:
-                f = open(fr"{os.getenv('WINDIR')}\System32\drivers\etc\hosts", "a+")
+                f = open(fr"{getenv('WINDIR')}\System32\drivers\etc\hosts", "a+")
                 add(f, server)
                 f.close()
 
@@ -104,7 +116,7 @@ class Patcher(QtWidgets.QMainWindow, Ui_Form):
                 QtWidgets.QMessageBox.critical(self, "Ошибка!", "Что-то пошло не так :(", QtWidgets.QMessageBox.Ok)
         else:
             try:
-                f = open(fr"{os.getenv('WINDIR')}\System32\drivers\etc\hosts", "w")
+                f = open(fr"{getenv('WINDIR')}\System32\drivers\etc\hosts", "w")
                 add(f, server)
                 f.close()
             except PermissionError:
@@ -113,16 +125,16 @@ class Patcher(QtWidgets.QMainWindow, Ui_Form):
             except Exception:
                 QtWidgets.QMessageBox.critical(self, "Ошибка!", "Что-то пошло не так :(", QtWidgets.QMessageBox.Ok)
         
-        self.set_ping()
-        self.set_patch_status()
-        self.update_button()
+        self.set_ping(server)
+        self.set_patch_status(server)
+        self.update_button(server)
 
     def unpatch_server(self, server):
         try:
-            f = open(fr"{os.getenv('WINDIR')}\System32\drivers\etc\hosts", "r+")
+            f = open(fr"{getenv('WINDIR')}\System32\drivers\etc\hosts", "r+")
             texts = f.read()
             f.seek(0)
-            texts = texts.replace(f'\n127.0.0.1 {hosts[server]}', '')
+            texts = texts.replace(f"\n127.0.0.1 {server['ip']}", '')
             f.write(texts)
             f.truncate()
             f.close()
@@ -131,18 +143,17 @@ class Patcher(QtWidgets.QMainWindow, Ui_Form):
 
         except Exception:
             QtWidgets.QMessageBox.critical(self, "Ошибка!", "Что-то пошло не так :(", QtWidgets.QMessageBox.Ok)
-        
-        self.set_ping()
-        self.set_patch_status()
-        self.update_button()
 
-    def server_button_pushed(self, server_number):
-        if self.server_data[server_number]['patched']:
-            self.unpatch_server(server_number)
+        self.set_ping(server)
+        self.set_patch_status(server)
+        self.update_button(server)
+
+    def server_button_pushed(self, server):
+        if server['patched']:
+            self.unpatch_server(server)
         else:
-            self.patch_server(server_number)
-
+            self.patch_server(server)
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication(argv)
     pathcer = Patcher()
-    sys.exit(app.exec_())
+    exit(app.exec_())

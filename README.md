@@ -1,5 +1,7 @@
 # Warface Server Patcher
-
+![GitHub all releases](https://img.shields.io/github/downloads/ShitryaDima/wf-server-patcher/total?style=flat-square)
+![GitHub](https://img.shields.io/github/license/shitryadima/wf-server-patcher?style=flat-square)
+  
 В начале 2021 года в Игровом центре mail.ru был ограничен доступ к выбору любого регионального сервера для игры Warface. Остались доступны лишь сервера с наименьшей задержкой.
 
 Warface Server Patcher вносит изменения в hosts файл Windows, перенаправляя ping-запрос Игрового центра  на локальный хост, что позволяет обойти  данное ограничение без каких-либо изменений в коде клиента.
